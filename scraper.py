@@ -6,15 +6,26 @@ chrome_driver_path = r'D:\Git-Hub\carbuy-scraper\chromedriver-win64\chromedriver
 driver = webdriver.Chrome(executable_path=chrome_driver_path)
 
 # Navigate to the website
-driver.get('https://www.pakwheels.com/used-cars/search/-/?q=civic')
+driver.get('https://www.pakwheels.com/used-cars/search/-/?q=bmw')
 
 # Locate all price elements using their class name
 price_elements = driver.find_elements(By.CLASS_NAME, 'price-details')
 
-# Extract the text of the price elements for the first 10 listings
+# Locate all name elements using their class name
+name_elements = driver.find_elements(By.CLASS_NAME, 'car-name')
+
+# Locate all links
+links = driver.find_elements(By.CLASS_NAME, 'car-name')
+
+# Extract the text of the price elements, names, and links for the first 10 listings
 for i in range(10):
+    name = name_elements[i].find_element(By.TAG_NAME, 'h3').text
     price = price_elements[i].text
-    print(f"Price of listing {i+1}: {price}")
+    link = links[i].get_attribute('href')
+    print(f"Name: {name}, ")
+    print(f"Price: {price}, ")
+    print(f"Link: {link}")
+    print()  # Add an empty line for spacing
 
 # Close the browser
 driver.quit()
