@@ -5,8 +5,11 @@ from selenium.webdriver.common.by import By
 chrome_driver_path = r'D:\Git-Hub\carbuy-scraper\chromedriver-win64\chromedriver-win64\chromedriver.exe'
 driver = webdriver.Chrome(executable_path=chrome_driver_path)
 
+#variables
+make_model=input('Please enter make/model: ')
+
 # Navigate to the website
-driver.get('https://www.pakwheels.com/used-cars/search/-/?q=accord')
+driver.get('https://www.pakwheels.com/used-cars/search/-/?q='+ make_model)
 
 # Locate all price elements using their class name
 price_elements = driver.find_elements(By.CLASS_NAME, 'price-details')
