@@ -20,8 +20,8 @@ name_elements = driver.find_elements(By.CLASS_NAME, 'car-name')
 # Locate all links
 links = driver.find_elements(By.CLASS_NAME, 'car-name')
 
-# Extract the text of the price elements, names, and links for the first 10 listings
-for i in range(20):
+# Extract the text of the price elements, names, and links for all listings
+for i in range(len(price_elements)):
     name = name_elements[i].find_element(By.TAG_NAME, 'h3').text
     price = price_elements[i].text
     link = links[i].get_attribute('href')
