@@ -11,11 +11,16 @@ service = Service(chrome_driver_path)
 # Initialize the Chrome driver with the service
 driver = webdriver.Chrome(service=service)
 
-# variables
+# Function to format make/model to be URL-friendly
+def format_make_model(make_model):
+    return make_model.replace(" ", "-")
+
+# Get user input and format it
 make_model = input('Please enter make/model: ')
+formatted_make_model = format_make_model(make_model)
 
 # Navigate to the website
-driver.get('https://www.olx.com.pk/cars_c84/q-' + make_model)
+driver.get('https://www.olx.com.pk/cars_c84/q-' + formatted_make_model)
 
 # Locate all price elements using their class name
 price_elements = driver.find_elements(By.CLASS_NAME, '_95eae7db')
