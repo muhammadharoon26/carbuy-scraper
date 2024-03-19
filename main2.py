@@ -81,7 +81,7 @@ class CarScraper:
 
 if __name__ == '__main__':
     scraper = CarScraper(r'D:\Git-Hub\carbuy-scraper\chromedriver-win64\chromedriver-win64\chromedriver.exe')
-    make_model = input("Enter make/model:\n")# You can also use input() to dynamically ask the user
+    make_model = input("Enter make/model:\n")
     sorted_listings = scraper.scrape_listings(make_model)
     
     for listing in sorted_listings:
