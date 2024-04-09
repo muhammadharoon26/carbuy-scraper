@@ -80,7 +80,7 @@ class CarScraper:
         return sorted_listings
 
 if __name__ == '__main__':
-    scraper = CarScraper(r'D:\Git-Hub\carbuy-scraper\chromedriver-win64\chromedriver-win64\chromedriver.exe')
+    scraper = CarScraper(r'D:\Git-Hub\carbuy-scraper\chromedriver-win64\chromedriver.exe')
     make_model = input("Enter make/model:\n")
     sorted_listings = scraper.scrape_listings(make_model)
     
