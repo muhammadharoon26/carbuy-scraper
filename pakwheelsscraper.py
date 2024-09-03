@@ -1,34 +1,46 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 
-# Set up the Chrome web driver with the correct path to chromedriver executable
-chrome_driver_path = r'D:\Git-Hub\carbuy-scraper\chromedriver-win64\chromedriver-win64\chromedriver.exe'
-driver = webdriver.Chrome(executable_path=chrome_driver_path)
 
-#variables
-make_model=input('Please enter make/model: ')
+class PakWheelScraper:
+    def __init__(self) -> None:
+        self.chrome_options = webdriver.ChromeOptions()
+        self.chrome_options.add_experimental_option("detach", True)
+        self.driver = webdriver.Chrome(options=self.chrome_options)
 
-# Navigate to the website
-driver.get('https://www.pakwheels.com/used-cars/search/-/?q='+ make_model)
+        self.elements_locater()
+        self.extract_text()
 
-# Locate all price elements using their class name
-price_elements = driver.find_elements(By.CLASS_NAME, 'price-details')
+    def elements_locater(self):
+        """This funcion will take input and then locate the relevent HTML element from the pakwheel website"""
+        # variables
+        self.make_model = input("Please enter make/model: ")
 
-# Locate all name elements using their class name
-name_elements = driver.find_elements(By.CLASS_NAME, 'car-name')
+        # Navigate to the website
+        self.driver.get(
+            "https://www.pakwheels.com/used-cars/search/-/?q=" + self.make_model
+        )
 
-# Locate all links
-links = driver.find_elements(By.CLASS_NAME, 'car-name')
+        # Locate all price
+        self.price_elements = self.driver.find_elements(By.CLASS_NAME, "price-details")
 
-# Extract the text of the price elements, names, and links for all listings
-for i in range(len(price_elements)):
-    name = name_elements[i].find_element(By.TAG_NAME, 'h3').text
-    price = price_elements[i].text
-    link = links[i].get_attribute('href')
-    print(f"Name: {name}, ")
-    print(f"Price: {price}, ")
-    print(f"Link: {link}")
-    print()  # Add an empty line for spacing
+        # Locate all name
+        self.name_elements = self.driver.find_elements(By.CLASS_NAME, "car-name")
 
-# Close the browser
-driver.quit()
+        # Locate all links
+        self.links = self.driver.find_elements(By.CLASS_NAME, "car-name")
+
+    def extract_text(self):
+        """This funcion Extract the text of the price elements, names, and links for all listings"""
+
+        for i in range(len(self.price_elements)):
+            name = self.name_elements[i].find_element(By.TAG_NAME, "h3").text
+            price = self.price_elements[i].text
+            link = self.links[i].get_attribute("href")
+            print(f"Name: {name}, ")
+            print(f"Price: {price}, ")
+            print(f"Link: {link}")
+            print()  # Add an empty line for spacing
+
+
+pakwheel = PakWheelScraper()
